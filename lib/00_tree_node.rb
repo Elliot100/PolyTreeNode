@@ -39,11 +39,15 @@ class PolyTreeNode
         childrens = self.children
         if childrens.include?(child)
             childrens.each_with_index do |kid,i| 
-                self.children = 
-
+                self.children = childrens.take(i) + childrens.drop(i+1) if kid == child
             end
+            child.parent = nil
         else
             raise "not a children"
         end
+    end
+
+    def dfs(target_value)
+
     end
 end
