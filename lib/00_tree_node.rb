@@ -1,3 +1,5 @@
+require_relative "Queue.rb"
+
 class PolyTreeNode
     attr_accessor :parent, :children, :value
     def initialize(val)
@@ -54,6 +56,19 @@ class PolyTreeNode
         @children.each do |child|
             result = child.dfs(target_value)
             return result unless result == nil
+        end
+        nil
+    end
+
+    def bfs(target_value)
+        myqueue = Queue.new
+        myqueue.enqueue(self)
+
+        until myqueue.queue.empty?
+            current_node = myqueue.dequeue
+            return current_node if current_node.value == target_value
+
+            current_node.children.each {|child| myqueue.queue << child}
         end
         nil
     end
